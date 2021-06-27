@@ -1,0 +1,21 @@
+<div fxLayoutAlign="center center" fxFlexFill class="main-div">
+	<mat-card fxFlex="25">
+		<mat-toolbar color="primary">User Registration Page</mat-toolbar>
+<form fxLayoutAlign="stretch" fxLayout="column" class="login-form" [formGroup]="formGroup" (ngSubmit)="userRegistrationForm()">
+  <mat-form-field >
+    <input matInput placeholder="Name" formControlName="name">
+  </mat-form-field>
+  <mat-form-field >
+    <input matInput placeholder="Email" formControlName="email">
+  </mat-form-field>
+  <mat-form-field >
+    <input matInput placeholder="Password" type="password" formControlName="password">
+  </mat-form-field>
+  <mat-form-field >
+    <input matInput placeholder="Confirm Password" type="password" formControlName="c_password">
+  </mat-form-field>
+  <button mat-raised-button type="submit" class="mt-5" color="primary">Submit</button>
+</form>
+
+	</mat-card>
+</div>

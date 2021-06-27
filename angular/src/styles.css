@@ -1,0 +1,8 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+/*.main-div mat-card {
+	padding:0px;
+}*/
+.main-div {
+	padding:100px;
+}
+
