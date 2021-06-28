@@ -43,13 +43,16 @@ few route only for admin
 product form
 category list
 udeamy
-307.add edit one page not working
+307.add edit one page not working******
 304.https://github.com/yuyang041060120/ng2-validation
 305.getbootstrap.com/docs/4.0/components/card/
 312.
 314.https://www.youtube.com/watch?v=q3sHZLjsLas 
-315 error in serch data custom with table not working,table resizin not working
-316.need to later  user redirecting
+315 error in serch data custom with table not working,table resizin not working******
+316.need to later  user redirecting******
+
+
+
 
 
 ng g c product-form-add

@@ -11,6 +11,10 @@ import { ProductFormAddComponent } from './admin/product-form-add/product-form-a
 
 const routes: Routes = [
   {
+    path:'',
+    component:ProductsComponent
+  },
+  {
     path:'login',
     component:LoginComponent
   },
