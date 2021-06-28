@@ -30,6 +30,8 @@ import { ProductService } from './product.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { CustomFormsModule } from 'ng2-validation';
 import { ProductFormAddComponent } from './admin/product-form-add/product-form-add.component';
+import { DataTablesModule } from 'angular-datatables';
+
 
 @NgModule({
   declarations: [
@@ -59,7 +61,8 @@ import { ProductFormAddComponent } from './admin/product-form-add/product-form-a
     MatIconModule,
     MatSidenavModule,
     MatListModule,
-    CustomFormsModule
+    CustomFormsModule,
+    DataTablesModule
 
   ],
   providers: [

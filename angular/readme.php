@@ -43,13 +43,27 @@ few route only for admin
 product form
 category list
 udeamy
-
+307.add edit one page not working
 304.https://github.com/yuyang041060120/ng2-validation
 305.getbootstrap.com/docs/4.0/components/card/
-312.https://www.npmjs.com/package/angular-4-data-table
+312.
+314.https://www.youtube.com/watch?v=q3sHZLjsLas 
+315 error in serch data custom with table not working,table resizin not working
+316.need to later  user redirecting
 
 
 ng g c product-form-add
+
+git config --global user.name "Sneha sur"
+git config --global user.email "snehasurece@gmail.com"
+git remote add origin https://github.com/snehasur/angvel.git
+
+git add .
+git commit -m "push from ofclptp"
+git push -u origin master
+
+git pull 
+
 <div class="row">
     <div class="col s8 offset-s2">
       <div class="card">

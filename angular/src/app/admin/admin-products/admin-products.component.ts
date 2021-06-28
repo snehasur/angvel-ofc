@@ -1,7 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ProductService } from 'src/app/product.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Product } from './../../models/product';
+
+declare var $ :any;
 
 @Component({
   selector: 'app-admin-products',
@@ -9,16 +11,20 @@ import { Product } from './../../models/product';
   styleUrls: ['./admin-products.component.css']
 })
 export class AdminProductsComponent implements OnInit,OnDestroy {
-//products:any;
+
 products: Product | any;
 filteredProducts:any;
-  subscription: Subscription;
+  subscription!: Subscription;
+
+  dtOptions: any = {};
+
   constructor(
     private productService:ProductService
 
   ) {
-  this.subscription=this.productService.getProduct()
-  .subscribe(products=> this.filteredProducts =this.products=products);
+   
+  // this.subscription=this.productService.getProduct()
+  // .subscribe(products=> this.filteredProducts =this.products=products);
       //console.log(Response);
 
 
@@ -28,15 +34,29 @@ filteredProducts:any;
      this.filteredProducts = (query) ?
       this.products.filter((p: any) => p.title.toLowerCase().includes(query.toLowerCase())) :
       this.products;
-
-   // this.initializeTable(filteredProducts);
-
+      this.initializeTable();
   }
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+   this.subscription.unsubscribe();
+  }
+  ngOnInit() {
+  
+   this.subscription=
+   this.productService.getProduct()
+    .subscribe(products=> {this.filteredProducts =this.products=products    
+     this.initializeTable(); 
+    });
   }
 
-  ngOnInit(): void {
+  initializeTable(){
+    setTimeout(()=>{                          
+      $('#datatableexample').DataTable( {
+        pagingType: 'full_numbers',
+        pageLength: 5,
+        processing: true,
+        lengthMenu : [5, 10, 25],
+        order:[[1,"desc"]]
+    } );
+    }, 1);
   }
-
 }
