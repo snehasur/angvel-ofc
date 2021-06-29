@@ -13,7 +13,7 @@ import { take } from 'rxjs/operators';
 })
 export class ProductFormComponent implements OnInit {
   categories$: any;
-  product$:any;
+  product:any;
   id;
   constructor(
     private route:ActivatedRoute,
@@ -29,8 +29,8 @@ export class ProductFormComponent implements OnInit {
     if (this.id)
      productService.getsingleProduct(this.id).subscribe(Responsen =>
        {
-         this.product$ = Responsen;
-       console.log(this.product$);
+         this.product = Responsen;
+       console.log(this.product);
 
       });
 

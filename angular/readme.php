@@ -50,7 +50,7 @@ udeamy
 314.https://www.youtube.com/watch?v=q3sHZLjsLas 
 315 error in serch data custom with table not working,table resizin not working******
 316.need to later  user redirecting******
-
+325.btn need to big not fixed********
 
 
 
