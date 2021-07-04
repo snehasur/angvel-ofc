@@ -121,6 +121,7 @@ class UserController extends Controller
         $resArr['status']='200';
         return response()->json($resArr,200);
     }
+
     public function product(Request $request)
     {
         $product=Product::all();
@@ -202,7 +203,33 @@ class UserController extends Controller
             return response()->json($resArr,202);
         }
     }
+        
+    public function shoppingcart(Request $request)
+    {
+        // $validation = Validator::make($request->all(),[
+        //     'title' => 'required',
+        //     'price'=>'required',
+        //     'category'=>'required',
+        //     'imageUrl'=>'required',
 
+        // ]);
+        // if($validation->fails()){
+        //    $resArr=[];
+        //    $resArr['token']='';
+        //    $resArr['errors']=$validation->errors();
+        //    $resArr['status']='202';
+        //    return response()->json($resArr,202);
+
+        // }
+        $task = Product::create($request->all());
+
+        $allData=$request->all();
+
+        $resArr=[];
+        $resArr['data']=$allData;
+        $resArr['status']='200';
+        return response()->json($resArr,200);
+    }
     /**
      * Store a newly created resource in storage.
      *

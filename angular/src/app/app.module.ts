@@ -33,6 +33,7 @@ import { ProductFormAddComponent } from './admin/product-form-add/product-form-a
 import { DataTablesModule } from 'angular-datatables';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 import { ProductCardComponent } from './product-card/product-card.component';
+import { ShoppingcartService } from './shoppingcart.service';
 
 
 @NgModule({
@@ -67,11 +68,13 @@ import { ProductCardComponent } from './product-card/product-card.component';
     MatListModule,
     CustomFormsModule,
     DataTablesModule
+    
 
   ],
   providers: [
     CategoryService,
-    ProductService
+    ProductService,
+    ShoppingcartService
   ],
   bootstrap: [AppComponent]
 })

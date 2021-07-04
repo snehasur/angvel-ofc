@@ -9,7 +9,7 @@
         <div class="row">
             <ng-container  *ngFor="let p of filteredProducts ; let i=index">
             <div class="col">
-                <product-card [product]="p"></product-card>
+                <product-card [product]="p" [shopping-cart]="cart"></product-card>
                 <!-- <div  class="card" style="width: 15rem;">
                     <img class="card-img-top" [src]="p.imageUrl" alt="card image cap">
                     <div class="card-body">

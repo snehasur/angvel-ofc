@@ -33,7 +33,7 @@ Route::post('register', [UserController::class, 'registration']);
 	Route::get('productsingle/{id}', [UserController::class, 'productsingle']);
 	Route::post('productupdate/{id}', [UserController::class, 'productupdate']);
 	Route::get('productdelete/{id}', [UserController::class, 'productdelete']);
-
+	Route::post('shopping-cart', [UserController::class, 'shoppingcart']);
 
 
 
