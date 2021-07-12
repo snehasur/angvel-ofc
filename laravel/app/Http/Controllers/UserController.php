@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Category;
 use App\Models\Product;
-
+use App\Models\Shoppingcart;
 class UserController extends Controller
 {
     /**
@@ -202,9 +202,9 @@ class UserController extends Controller
            $resArr['status']='202';
             return response()->json($resArr,202);
         }
-    }
+    }   
         
-    public function shoppingcart(Request $request)
+    public function shoppingcart(Request $request,$id)
     {
         // $validation = Validator::make($request->all(),[
         //     'title' => 'required',
@@ -221,14 +221,105 @@ class UserController extends Controller
         //    return response()->json($resArr,202);
 
         // }
-        $task = Product::create($request->all());
+     //   die('jj');
+        //$task = Shoppingcart::create($request->all());
+        $task = new Shoppingcart;
+
+        $task->dateCreated = $id;
+
+        $task->save();
 
         $allData=$request->all();
-
+        $id=$task->id;
         $resArr=[];
-        $resArr['data']=$allData;
-        $resArr['status']='200';
+       $resArr['data']=$id;
+       // $resArr['status']='200';
         return response()->json($resArr,200);
+    }
+    
+
+     public function shoppingcarts(Request $request,$id)
+    {
+ 
+        $data=Shoppingcart::where('shoppingcarts_id', '=', $id)
+              ->get();
+              //print_r($data);die();
+        $resArr=[];
+        if($data){
+            $resArr['data']=$data;
+            $resArr['status']='200';
+            return response()->json($data,200);
+
+        }else{
+           $resArr['token']='';
+           $resArr['errors']='Unauthrized Access';
+           $resArr['status']='202';
+            return response()->json($resArr,202);
+        }
+    }
+        public function shoppingdetails(Request $request){
+
+        $cartid=$productid=$productdetails="";
+        $cartid=str_replace('"','',$request->cart);
+        $productid=$request->productid;
+        $productdetails=$request->product;
+        if(!empty($cartid) && !empty($productid)){
+        $firstcart= Shoppingcart::where('shoppingcarts_id', null)
+            ->where('id',$cartid)->first();
+            if($firstcart){
+               $task=  Shoppingcart::where('id',$cartid)               
+                ->update([
+                  'product'=>$productdetails,
+                  'productid'=>$productid,
+                  'quantity'=>1,
+                  'shoppingcarts_id'=>$cartid
+
+                ]);
+               
+                return response()->json($productdetails,200);
+            }else{
+                    $cartproduct= Shoppingcart::where('shoppingcarts_id',$cartid)
+                    ->where('productid',$productid)->first();
+                    //print_r($cartproduct);
+                    if($cartproduct){
+                        Shoppingcart::where('shoppingcarts_id',$cartid)
+                        ->where('productid',$productid)
+                        ->update([
+                          'quantity'=> \DB::raw('quantity+1')
+                        ]);
+                         
+                        return response()->json($productdetails,200);
+                    }else{
+
+
+                    // $taskn["shoppingcarts_id"] = $cartid;
+                    // $taskn["productid"] = $productid;
+                    // $taskn["product"] = $productdetails;
+                    // $taskn["quantity"] = 1;
+                    // $taskn["dateCreated"] = time();
+
+                   
+                    $tasknew=Shoppingcart::create([                 
+                      'productid'=>$productid,
+                      'quantity'=>1,
+                      'shoppingcarts_id'=>$cartid,
+                      'dateCreated'=>time()
+
+                ]);
+                    Shoppingcart::where('shoppingcarts_id',$cartid)
+                        ->where('productid',$productid)
+                        ->update([
+                          'product'=> $productdetails
+                        ]);
+                  // echo time();
+                    return response()->json($tasknew,200);   
+                }
+
+            }
+
+
+        }
+       
     }
     /**
      * Store a newly created resource in storage.

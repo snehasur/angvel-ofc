@@ -14,12 +14,9 @@ auth checking,
 logout
 
 
-php artisan make:controller ShoppingcartController
-php artisan make:model Shoppingcart -mcr
-php artisan make:model Shoppingcart -m
-
-
-need to separate controler base code ,array ,validation,migration
+php artisan make:controller CategoryController
+php artisan make:model product -mcr
+php artisan make:model product -m
 
 
 

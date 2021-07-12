@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpResponse } from '@angular/common/http';
 import { baseUrl } from './../environments/environment';
 import { Observable } from 'rxjs';
 import { Product } from './models/product';
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,13 +14,14 @@ export class ShoppingcartService {
   constructor(private http: HttpClient) {
   }
 
-  private create(){
+  public async create(){
     const dateCreated=new Date().getTime();
-    //console.log(dateCreated);
-  	return this.http.get(`${baseUrl}shoppingcart/`+dateCreated);
+     return this.http.get(`${baseUrl}shoppingcart/`+dateCreated).pipe(map(res=>{return res})).toPromise();
+    
   }
-  public getid(id:any){
-  	return this.http.get(`${baseUrl}shoppingcarts/`+id);
+  public async getid(id:any){
+    return this.http.get(`${baseUrl}shoppingcarts/`+id).pipe(map(res=>{return res}));
+
   }
   // public getCart(cartId:string){
   //   var self=this;
@@ -57,29 +59,22 @@ export class ShoppingcartService {
   // }
 
   
-  private async getOrCreateCart(){
-    this.cartId=localStorage.getItem('cartId');    
-      if(!this.cartId) {
-        this.create().subscribe(async(result:any)=>{      
-        localStorage.setItem('cartId',result);  
-        //var data=await this.getCart(result);
-        //console.log(data);   
-        console.log(result);
-       // console.log('uuuuuuuuuuuu'); 
-       // console.log(this.cartId);
-       // return data;
-        return result;
-      });
-    }else{
-     // var data=await this.getCart(this.cartId);
-     // console.log('hhhh');
-     // console.log(this.cartId);
-      //console.log(data);
-      //return data;
-      return this.cartId;
-     }
+  //  getOrCreateCart(product:Product){
+  //   this.cartId=localStorage.getItem('cartId');    
+  //     if(!this.cartId) {
+  //       this.create().subscribe((result:any)=>{      
+  //       localStorage.setItem('cartId',result.data);  
+      
+  //       console.log(result.data);
+       
+  //       return result.data;
+  //     });
+  //   }else{
+   
+  //     return this.cartId;
+  //    }
     
-    }
+  //   }
   // private async getOrCreateCart(){
   //   let cartId=localStorage.getItem('cartId');    
   //   if(cartId)  return this.getCart(cartId);     
@@ -92,21 +87,7 @@ export class ShoppingcartService {
     return this.http.post(`${baseUrl}shoppingdetails`,alldata);
   
   }
-  async addToCart(product: Product) {
-    //console.log('2nd');
-   let cart=await this.getOrCreateCart();
-  console.log(cart);
-   let alldata={
-    'cart':cart,
-    'productid':product.id,
-    'product':product
-   };
-   console.log(alldata);
-   this.shoppingdetails(alldata).subscribe((result: any)=>{
-     console.log(result);
-    });
 
-   }
 
 
 }
