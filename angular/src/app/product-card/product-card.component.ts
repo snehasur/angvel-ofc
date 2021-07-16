@@ -39,8 +39,8 @@ export class ProductCardComponent{
    console.log(this.cartId);
   if(!this.cartId) return 0;
   else{
-    this.shoppingCart=await this.cartService.getid(this.cartId);
-    console.log(this.shoppingCart);
+    // this.shoppingCart=await this.cartService.getid(this.cartId);
+    // console.log(this.shoppingCart);
   }
 
    // this.shoppingCart=this.cartService.getid(this.cartId);
