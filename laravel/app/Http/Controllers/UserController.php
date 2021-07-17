@@ -36,9 +36,8 @@ class UserController extends Controller
         $allData=$request->all();
         $allData['password']=bcrypt($allData['password']);
         $user=User::create($allData);
-
         $resArr=[];
-        $resArr['token']=$user->createToken('api-application')->accessToken;
+        $resArr['token']=bcrypt($allData['password']);//$user->createToken('api-application')->accessToken;
         $resArr['status']='200';
         return response()->json($resArr,200);
     }
@@ -48,7 +47,7 @@ class UserController extends Controller
             $user =Auth::user();
             $userdetails = User::where('email',$request->email)->first();
             $resArr=[];
-            $resArr['token']=$user->createToken('api-application')->accessToken;
+            $resArr['token']=$user->password;//$user->createToken('api-application')->accessToken;
             $resArr['name']=$user->name;
             $resArr['status']='200';
             return response()->json($resArr,200);
